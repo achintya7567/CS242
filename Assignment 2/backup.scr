@@ -1,23 +1,32 @@
 #!/bin/bash
 
+#Taking inputs, first argument is a file name from which names of files to be backed up are taken.
+#Second argument is the directory in which file should be backed up
 filename=$1
 destination=$2
+
+#This if statement checks if a 3rd argument was not given (which is the required case), else it stops programme.
 if [ -z $3 ]
 then
-    if [ -z $destination ]
+    if [ -z $destination ]  #Checks if 2nd argument given.
     then
-        if [ -z $filename ]
+        if [ -z $filename ]     #Checks if first argument given.
         then
             echo "No arguments entered. Please enter 2 arguments Filename and Directory name"
         else
             echo "Only 1 argument is given. Please enter 2 arguments Filename and Directory name"
         fi
     else
-        if [[ -f $filename ]]; then
-            if [[ -d $destination ]]; then
-                cat $filename | while read file; do
+        if [[ -f $filename ]]; then     #Checks if file exists
+            if [[ -d $destination ]]; then      #Checks if directory exists
+                cat $filename | while read file; do     #Reads file names line by line from given file.
+                    
+                    #Copies the file (variable taken line by line) to the given destination folder
                     cp $file $destination
+                    
+                    #Finds the extension of the backup file in destination directory and replaces it with .bak
                     mv "$destination/$file" "$destination/${file%.*}.bak"
+                    echo "$file been backed up to the directory '$destination'"
                 done
             else
                 echo "Directory name is incorrect. Please enter valid directory name."
