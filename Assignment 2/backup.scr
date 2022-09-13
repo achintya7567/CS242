@@ -1,0 +1,31 @@
+#!/bin/bash
+
+filename=$1
+destination=$2
+if [ -z $3 ]
+then
+    if [ -z $destination ]
+    then
+        if [ -z $filename ]
+        then
+            echo "No arguments entered. Please enter 2 arguments Filename and Directory name"
+        else
+            echo "Only 1 argument is given. Please enter 2 arguments Filename and Directory name"
+        fi
+    else
+        if [[ -f $filename ]]; then
+            if [[ -d $destination ]]; then
+                cat $filename | while read file; do
+                    cp $file $destination
+                    mv "$destination/$file" "$destination/${file%.*}.bak"
+                done
+            else
+                echo "Directory name is incorrect. Please enter valid directory name."
+            fi
+        else
+            echo "File name entered is incorrect. Please enter valid file name."
+        fi
+    fi
+else
+    echo "More than 2 arguments entered. Please enter 2 arguments Filename and Directory name"
+fi
