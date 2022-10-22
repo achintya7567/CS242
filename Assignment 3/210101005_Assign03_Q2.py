@@ -1,5 +1,5 @@
-import copy
-import random
+import copy  #imported to use the deepcopy() function which copies all the elements without reference of the list
+import random  #used the random choice function from the available choices when multiple moves are equivalent
 from math import floor
 
 
@@ -21,18 +21,17 @@ print("Input Goal Matrix")
 for i in range(3):
     goal.append([int(x) for x in input().split()])
 
+chosen=[]
+chosen.append(copy.deepcopy(matrix))
 
 
 print()
 print("START OF OUTPUT")
 print()
-visited=[]
-chosen=[]
-visited.append(copy.deepcopy(matrix))
-chosen.append(copy.deepcopy(matrix))
+
 #Functions
 
-#For finding element in the matrix
+#For finding element index pair (i,j) of element x in the matrix such that a_ij=x
 def findElement(x, arr):
     for i in range(3):
         for j in range(3):
@@ -48,6 +47,8 @@ def printf(arr):
     print()
 
 #To check if the problem is solvable using inversion count
+#Inversion count of both start and end config would be the same % 2 (odd or even), so their sum will be even.
+#Using this logic-
 def solvable():
     linear_matrix=[]
     mat=copy.deepcopy(matrix)
@@ -91,7 +92,7 @@ def shift(x):
     matrix[findx[0]][findx[1]],matrix[findy[0]][findy[1]] = matrix[findy[0]][findy[1]], matrix[findx[0]][findx[1]]
 
 #Defined a type of distance of a tile, increases readability
-#Also easier to edit the function
+#Also easier to edit the function later
 def distance(x):
     return abs(findElement(x,matrix)[0]-findElement(x, goal)[0])+abs(findElement(x,matrix)[1]-findElement(x, goal)[1])
            
@@ -120,7 +121,7 @@ def cost():
         return Cost
     
     
-#Returns if goal configuration is reached
+#Returns True if goal configuration is reached
 def isGoal():
     global matrix
     return matrix==goal
@@ -128,13 +129,13 @@ def isGoal():
 #Finding which configuration to be chosen
 def chooseConfig():
 
-    #Global allows us to to make changes in global variables, matrix and visited and not form local variables
-    global matrix, visited
+    #Global allows us to to make changes in global variables, matrix and not form local variables
+    global matrix
     copyMat=copy.deepcopy(matrix)
     cost_list=[]
     pref=0
 
-    #possible_list contains the which of the 4 moves are possible
+    #possible_list contains the which of the 4 moves(up,down,left,right) are possible for the given blank tile
     possible_list=[]
 
     #First move, moving upper tile to space
@@ -146,7 +147,6 @@ def chooseConfig():
         if matrix not in chosen:
             cost_list.append(cost())
             pref=1
-            visited.append(copy.deepcopy(matrix))
         
         #Reverting matrix to original
         matrix=copy.deepcopy(copyMat)
@@ -157,7 +157,6 @@ def chooseConfig():
         shift(matrix[spaceX()+1][spaceY()])
         cost2=cost()
         if matrix not in chosen:
-            visited.append(copy.deepcopy(matrix))
 
             #This is the preferred move only if it's cost is lesser than all previous moves
             for i in cost_list:
@@ -174,7 +173,6 @@ def chooseConfig():
         shift(matrix[spaceX()][spaceY()-1])
         cost3=cost()
         if matrix not in chosen:
-            visited.append(copy.deepcopy(matrix))
             
             for i in cost_list:
                 if cost3>i:
@@ -190,7 +188,6 @@ def chooseConfig():
         shift(matrix[spaceX()][spaceY()+1])
         cost4=cost()
         if matrix not in chosen:
-            visited.append(copy.deepcopy(matrix))
             for i in cost_list:
                 if cost4>i:
                     break
@@ -221,18 +218,19 @@ count=0
 if not solvable():
     print("Puzzle is not solvable")
 else:
-    prev_pref=0
+    #Runs code till final configuration is not achieved
     while not isGoal():
         chooseConfig()
         chosen.append(copy.deepcopy(matrix))
         count+=1
-        if count>100:
-            break
-    if count<=100:
+    if count<=200:
         for i in chosen:
             printf(i)
-        print("Solved in", count, "moves")
+        print("Solved in", count, "moves printed above")
     else:
-        print()
-        print("Reachable but the algorithm takes more than 100 moves") 
+        print("Reachable but the algorithm takes more than 200 moves")
+        print("It can always print entire path but takes a lot of moves. Uncomment code to print all iterations") 
+        # for i in chosen:
+        #     printf(i)
+        # print("Solved in", count, "moves printed above")
     print()

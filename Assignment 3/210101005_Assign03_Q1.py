@@ -26,4 +26,7 @@ while len(members_alive)>1:
     #Updating the new shooter as the person standing next to the previous person killed
     shooter_index = killed_index+1
     shooter_index = shooter_index % len(members_alive)
-print(members_alive[0], "has survived")
+if(len(members_alive)==0):
+    print("No one survived")
+else:
+    print(members_alive[0], "has survived")
