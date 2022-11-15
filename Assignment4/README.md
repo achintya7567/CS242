@@ -25,29 +25,42 @@
 4. Then to find the composition we can backtrack from the n-th index to the 0th index, and find which denomination came just before (it would have taken dp_list[ n ]-1 steps) and store it in a list
 5. This list is printed using some python functions for clean representation.
 
-## Question 2: Random string generator using Perl
-
-### Submitted files:
-
--   Code file: 'Assignment2.pl'
--   Sample file that contains alphabet string to be used (named "input_characters.txt")
+## Question 2: Latex pages
 
 ### How to run:
 
-1. Go to the "input_characters.txt" file and input the string you wish to use.
-2. Open a Unix based terminal and change to the folder containing the Assignment2.pl script.
-3. Run the command "perl Assignment2.pl"
-4. It takes 2 inputs from the user.
+1. Ensure you have latex and its packages installed to run Latex
+2. Open a tex editor like Texmaker (offline) or Overleaf (online)
 
--   First, a count of maximum same letters in a substring.
--   Second, length of string to be outputted.
+-   If texmaker not present, run on terminal: sudo apt-get install texmaker
 
-It then returns the randomly generated string or returns if the string cannot be generated in special cases of count and input file value.
+3. Compile and make pdf of the code
 
-### List of steps: (Mentioned in comments in more detail)
+Alternatively:
 
-1. Opened the file for taking input alphabet string.
-2. Taken input of length and count from the user and run validity checks for special cases.
-3. The loop runs until the length of generated string is equal to the length input by user (as code inside the loop prevents it from being greater).
-4. If condition inside loop also prevents from substring length being greater than count.
-5. After all the checks, the string is updated.
+-   Run the command "pdflatex Q2_page1.tex" to form a pdf file of the tex and it can be then opened.
+-   Similarly run "pdflatex Q2_page2.tex"
+
+#### Note: Run the commands twice as the referencing does not work properly the first time due to problem of how latex works.
+
+### List of environments used:
+
+-   math mode (inline using $ maths $ or new line using $$ maths $$)
+-   equation and equation\*
+-   align\*
+-   matrix, pmatrix, bmatrix
+
+### List of packages:
+
+-   amsmath for some required environments
+-   hyperref for references and colouring the links
+
+### Symbols used:
+
+-   Standard physics and maths symbols used throughout the code with reference of standard latex documentation.
+-   tag{} is used to tag the equations with a number at the end of the line
+-   label{eq:1} is used to label the equations so they can be referenced later
+-   \textrm is used to write text inside math mode without italicizing (cannot write maths inside this)
+-   \mathrm used to write chemistry equations (does not italicize letters but you can write math)
+
+#### Note: Page numbers not removed as it was not clear in the image if it was just cropped or actually absent.
