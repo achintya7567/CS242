@@ -1,0 +1,72 @@
+%Document class to define the type of document
+\documentclass[12pt]{article}
+
+%amsmath package is used for align 
+\usepackage{amsmath}
+
+%Used to refer and change the default settings of a link
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue
+}
+\title{Hello World!}
+\author{Achintya Gupta}
+\date{1 November 2022}
+
+%Necessary to wrap all content in document
+\begin{document}
+
+\maketitle
+
+%Starting first section
+\section{Getting Started}
+\textbf{Hello World!} Today I am learning \LaTeX. \LaTeX\ is a great platform for writing math. I can write inline math such as $a^2 + b^2 = c^2$. I can also give equations their own space: 
+
+%Writes equation in new line and also adds the tag (1) at the end of the line
+\begin{equation}
+  \gamma^2 + \theta^2 = \omega^2  
+\end{equation}
+
+"Maxwell's equations" are named for James Clarke Maxwell and are as follow:
+
+%Align environment to align equations by = sign and text by the first letter of text
+%Also added labels and tag for refering to them later
+\begin{align*}
+\vec\nabla\cdot\vec{E} &= \frac{\rho}{\epsilon_0} & &\textrm{Gauss's Law}\label{eq:2}\tag{2}  \\
+\vec\nabla\cdot\vec{B} &= 0& &\textrm{Gauss's Law for Magnetism}\label{eq:3}\tag{3}\\
+\vec\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} & &\textrm{Faraday's Law of Induction}\label{eq:4}\tag{4}\\
+\vec\nabla \times \vec{B} &= \mu_0\left( \epsilon_0\frac{\partial\vec{E}}{\partial t} + \vec{J} \right) & &\textrm{Ampere's Circuital law}\label{eq:5}\tag{5}
+\end{align*}
+
+Equations \ref{eq:2}, \ref{eq:3}, \ref{eq:4}, \ref{eq:5} are some of the most important equations in Physics.
+
+\section{What about Matrix Equations?}
+%Equation* removes the numbering of equation
+\begin{equation*}
+%pmatrix makes a matrix within parentheses
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots  & \vdots  & \ddots & \vdots  \\
+a_{n1} & a_{n2} & \cdots & a_{nn} 
+\end{pmatrix}
+%bmatrix makes a matrix within brakcets
+\begin{bmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n
+\end{bmatrix}
+=
+%matrix without brackets
+\begin{matrix}
+w_1 \\
+w_2 \\
+\vdots \\
+w_n
+\end{matrix}
+\end{equation*}
+
+
+\end{document}
