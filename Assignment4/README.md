@@ -17,11 +17,13 @@
 
 #### Note: The programme works for sufficiently large input in quick time (upto 10^6) and for 10^7 in some time. It is advised to not run for larger inputs as it may take up too much memory and cause the system to hang.
 
-### List of steps: (Mentioned in comments in more detail)
+### List of steps:
 
-1. Form a dp array with the worst case scenario
-2. cat function opens the file from which file names are read line by line and then copied to the destination folder with changed extension '.bak' (from any extension, not just txt as shown by 'backup3.html')
-3. Outputs are shown according to the progress of the program.
+1. Form a dp array with the worst case scenario and initialize the base cases for 0 and all denominations given
+2. To reach given amount, you must have taken one of the given denominations as the last coin and even if you remove that coin, it would be the minimum steps to reach the previous amount.
+3. This inductively (and recursively) should give the best composition. This minimum number of steps is stored for each number less than or equal to n
+4. Then to find the composition we can backtrack from the n-th index to the 0th index, and find which denomination came just before (it would have taken dp_list[ n ]-1 steps) and store it in a list
+5. This list is printed using some python functions for clean representation.
 
 ## Question 2: Random string generator using Perl
 
